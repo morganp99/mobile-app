@@ -8,35 +8,42 @@ class CreateUser extends Component {
         super(props);
 
         this.state = {
-            email: 'morgan.williams@mmu.ac.uk',
-            password: 'heyheyhey',
-            first_name: 'Morgan',
-            last_name: 'Porch',
+            email: "morgan@hotmail",
+            password: "password123",
+            first_name: "morgan",
+            last_name: "porchy",
             id: '',
             token: ''
         }
     }
-    
+
 
     render() {
         //add some error handling for email password and such.
         return (
             <View>
+                <Text>First name</Text>
                 <TextInput
                     placeholder="Enter first name..."
                     onChangeText={(first_name) => this.setState({ first_name })}
                     value={this.state.first_name}
                 />
+                <Text>Last name</Text>
+
                 <TextInput
                     placeholder="Enter last name..."
                     onChangeText={(last_name) => this.setState({ last_name })}
                     value={this.state.last_name}
                 />
+                <Text>Email</Text>
+
                 <TextInput
                     placeholder="Enter email..."
                     onChangeText={(email) => this.setState({ email })}
                     value={this.state.email}
                 />
+                <Text>Password</Text>
+
                 <TextInput
                     placeholder="Enter password..."
                     onChangeText={(password) => this.setState({ password })}
@@ -53,7 +60,7 @@ class CreateUser extends Component {
 
     addUser = async () => {
 
-        const to_send = { first_name :'Morganp', last_name:'Porcpph', email: 'morganp.williams@mmu.ac.uk', password: 'heyheyheeyy'};
+        const to_send = { first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, password: this.state.password };
 
         try {
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0/user', {
@@ -85,8 +92,10 @@ class CreateUser extends Component {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+                console.log("User Logged in")
             console.log(await AsyncStorage.getItem('id'))
             console.log(await AsyncStorage.getItem('token'))
+            //navigation.navigate('Home')
         }
         catch (error) {
             console.log(error)
