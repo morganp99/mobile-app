@@ -95,7 +95,8 @@ class CreateUser extends Component {
                 console.log("User Logged in")
             console.log(await AsyncStorage.getItem('id'))
             console.log(await AsyncStorage.getItem('token'))
-            //navigation.navigate('Home')
+            const navigation = this.props.navigation;
+            navigation.navigate('AppNavigation')
         }
         catch (error) {
             console.log(error)
