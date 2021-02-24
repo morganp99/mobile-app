@@ -8,8 +8,8 @@ class CreateUser extends Component {
         super(props);
 
         this.state = {
-            first_name: 'morgan',
-            last_name: 'porch',
+            first_name: 'morhan',
+            last_name: 'asasas',
             email: 'test@email.co.uk',
             password: 'test123',
             id: '',

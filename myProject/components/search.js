@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-class Settings extends Component {
+class Search extends Component {
 
 
     
@@ -13,10 +13,10 @@ class Settings extends Component {
         //add some error handling for email password and such.
         return (
             <View>
-                <Text>Settings page</Text>
+                <Text>Search page</Text>
                 
             </View>
         );
     }
 }
-export default Settings;
+export default Search;
