@@ -8,13 +8,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './components/user-managment/login-user';
 import CreateUser from './components/user-managment/create-user';
-import AppNavigation from './components/app-navigation';
-
-//import UpdateUserDetails from './components/user-managment/update-user-details';
-
-import Home from './components/home'
-import Settings from'./components/settings';
-import Profile from './components/profile';
+import HomeNavigation from './components/navigation/home-navigation';
+import UpdateUserDetails from './components/user-managment/update-user-details';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +21,8 @@ class App extends Component {
                 <Stack.Navigator>
                     <Stack.Screen name="Login" component={Login} />
                     <Stack.Screen name="CreateUser" component={CreateUser} options={{title: "Create Account"}} />
-                    <Stack.Screen name= "AppNavigation" component={AppNavigation}/>
+                    <Stack.Screen name= "HomeNavigation" component={HomeNavigation}options={{title: "Home"}}/>
+                    <Stack.Screen name= "UpdateUserDetails" component={UpdateUserDetails}options={{title: "Update User Details"}}/>
                 </Stack.Navigator>
             </NavigationContainer>
 

@@ -4,13 +4,14 @@ import React, { Component } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Home from './home';
-import Settings from './settings';
-import Profile from './profile';
+import Home from '../home';
+import Search from '../search';
+import Profile from '../profile';
+import Camera from '../camera';
 
 const Tab = createBottomTabNavigator();
 
-class AppNavigation extends Component {
+class HomeNavigation extends Component {
     render() {
         const navigation = this.props.navigation;
         return (
@@ -37,11 +38,12 @@ class AppNavigation extends Component {
                     inactiveTintColor: 'gray',
                 }}
             >
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Settings" component={Settings} />
                 <Tab.Screen name="Profile" component={Profile} />
+                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="Search" component={Search} />
+                <Tab.Screen name="Camera" component={Camera}/>
             </Tab.Navigator>
         );
     }
 }
-export default AppNavigation;
+export default HomeNavigation;

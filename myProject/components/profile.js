@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Button, Alert } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 class Profile extends Component {
@@ -21,11 +19,15 @@ class Profile extends Component {
     
 
     render() {
-        //add some error handling for email password and such.
+        const navigation = this.props.navigation;
+        //add logout button here aswell.
         return (
             <View>
-                <Text>Profile page</Text>
-                
+                <Text>Profile</Text>
+                <Button
+                    title="Update Details"
+                    onPress={() => navigation.navigate('UpdateUserDetails')}
+                />
             </View>
         );
     }

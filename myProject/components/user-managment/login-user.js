@@ -11,8 +11,8 @@ class Login extends Component {
         super(props);
 
         this.state = {
-            email: "morgan@hotmail",
-            password: "password123",
+            email: 'test@email.co.uk',
+            password: 'test123',
             id: '',
             token: ''
         }
@@ -89,7 +89,7 @@ class Login extends Component {
             console.log(await AsyncStorage.getItem('id'))
             console.log(await AsyncStorage.getItem('token'))
             const navigation = this.props.navigation;
-            navigation.navigate('AppNavigation')
+            navigation.navigate('HomeNavigation')
         }
         catch (error) {
             console.log(error)

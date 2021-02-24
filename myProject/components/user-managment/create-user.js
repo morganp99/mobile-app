@@ -8,12 +8,11 @@ class CreateUser extends Component {
         super(props);
 
         this.state = {
-            email: "morgan@hotmail",
-            password: "password123",
-            first_name: "morgan",
-            last_name: "porchy",
+            first_name: 'morgan',
+            last_name: 'porch',
+            email: 'test@email.co.uk',
+            password: 'test123',
             id: '',
-            token: ''
         }
     }
 
@@ -60,7 +59,7 @@ class CreateUser extends Component {
 
     addUser = async () => {
 
-        const to_send = { first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, password: this.state.password };
+        const to_send = { password: this.state.password,first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email };
 
         try {
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0/user', {
@@ -76,14 +75,12 @@ class CreateUser extends Component {
                 .then(data => {
                     console.log('Success:', data);
                     this.setState({ id: data.id })
-                    this.setState({ token: data.token })
                     return data
                 })
                 .then(async () => {
 
                     try {
                         await AsyncStorage.setItem('id', this.state.id.toString())
-                        await AsyncStorage.setItem('token', this.state.token.toString())
                     }
                     catch (dataError) {
                         console.error('error:', dataError);
@@ -92,11 +89,11 @@ class CreateUser extends Component {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-                console.log("User Logged in")
+                console.log("Account Created.")
+                //console.log(to_send)
             console.log(await AsyncStorage.getItem('id'))
-            console.log(await AsyncStorage.getItem('token'))
             const navigation = this.props.navigation;
-            navigation.navigate('AppNavigation')
+            navigation.navigate('Login')
         }
         catch (error) {
             console.log(error)
