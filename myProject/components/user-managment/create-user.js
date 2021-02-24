@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, Button, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import ValidateUserCredentials from './validation/validate-user-credentials';
-
-class Login extends Component {
+class CreateUser extends Component {
 
     constructor(props) {
         super(props);
@@ -12,61 +10,53 @@ class Login extends Component {
         this.state = {
             email: 'morgan.williams@mmu.ac.uk',
             password: 'heyheyhey',
-            emailValidated: false,
-            passwordValidated: false,
+            first_name: 'Morgan',
+            last_name: 'Porch',
             id: '',
             token: ''
         }
     }
-
-    handleEmailInput = (email) => {
-
-        if (ValidateUserCredentials.ValidateEmail(email)) {
-            this.setState({ email: email })
-            this.setState({ emailValidated: true })
-        }
-        else {
-            Alert.alert('Invalid email')
-        }
-    }
-
-    handlePasswordInput = (pass) => {
-        //add validation e.g. min length, special char, capital letter, numbers
-
-        if (ValidateUserCredentials.ValidatePassword) {
-            this.setState({ password: pass })
-            this.setState({ passwordValidated: true })
-
-        }
-        else {
-            Alert.alert('Invalid Password')
-        }
-    }
+    
 
     render() {
+        //add some error handling for email password and such.
         return (
             <View>
-                <TextInput placeholder="email..." onChangeText={this.handleEmailInput} value={this.state.email} />
-                <TextInput placeholder="password..." onChangeText={this.handlePasswordInput} value={this.state.password} />
-                <Button
-                    title="Login"
-                    onPress={() => this.loginUser()}
+                <TextInput
+                    placeholder="Enter first name..."
+                    onChangeText={(first_name) => this.setState({ first_name })}
+                    value={this.state.first_name}
+                />
+                <TextInput
+                    placeholder="Enter last name..."
+                    onChangeText={(last_name) => this.setState({ last_name })}
+                    value={this.state.last_name}
+                />
+                <TextInput
+                    placeholder="Enter email..."
+                    onChangeText={(email) => this.setState({ email })}
+                    value={this.state.email}
+                />
+                <TextInput
+                    placeholder="Enter password..."
+                    onChangeText={(password) => this.setState({ password })}
+                    value={this.state.password}
                 />
                 <Button
-                    title="Sign"
-                    onPress={() => this.loginUser()}
+                    title="Create account"
+                    onPress={() => this.addUser()}
                 />
             </View>
-
         );
     }
 
-    loginUser = async () => {
 
-        const to_send = { email: 'morgan.williams@mmu.ac.uk', password: 'heyheyhey' };
+    addUser = async () => {
+
+        const to_send = { first_name :'Morganp', last_name:'Porcpph', email: 'morganp.williams@mmu.ac.uk', password: 'heyheyheeyy'};
 
         try {
-            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/user/login', {
+            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -103,4 +93,4 @@ class Login extends Component {
         }
     }
 }
-export default Login;
+export default CreateUser;
