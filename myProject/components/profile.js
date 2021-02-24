@@ -3,7 +3,6 @@ import { NavigationHelpersContext } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { Text, TextInput, View, Button, Alert } from 'react-native';
 
-//import LogOutUser from './user-managment/logout-user'
 
 class Profile extends Component {
 
@@ -44,6 +43,11 @@ class Profile extends Component {
                     title="Logout"
                     onPress={() => this.logOutUser()}
                 />
+                <Button
+                    title="User Details"
+                    onPress={() => navigation.navigate('GetUserDetails')}
+                />
+ 
             </View>
         );
     }
@@ -52,6 +56,7 @@ class Profile extends Component {
         fetch('http://10.0.2.2:3333/api/1.0.0/user/logout', {
                 method: 'POST',
                 headers: {
+                    'Content-Type': 'application/json',
                     'X-Authorization': this.state.token
                 },
             })
