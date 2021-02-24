@@ -1,25 +1,23 @@
+import 'react-native-gesture-handler';
+
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import User from './components/User';
+import Login from './components/user-managment/login-user';
 
-class HelloWorldApp extends Component{
-  render(){
+const Stack = createStackNavigator();
 
-    let my_list = [{name: "Oranges", quantity: 6},{name: "Apples", quantity:4}];
-     const get_number_of_items = (shopping_list) => {
-       let items =0;
-       items =+ i.quantity
-     }
-
-    const name = "morgan";
+function App() {
     return (
-      <View>
-        <Text> you have {get_number_of_items(my_list)} items in your basket hell yeah</Text>
-        <User name="Morgan" email="morgan.porch.com"/>
-      </View>
-    );
-  }
+
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
-export default HelloWorldApp
+export default App;
+
