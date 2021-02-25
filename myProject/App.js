@@ -13,6 +13,7 @@ import UpdateUserDetails from './components/user-managment/update-user-details';
 import GetUserDetails from './components/user-managment/get-user-details';
 import FindLocations from './components/location-managment/find-all-locations';
 import AddReviewToLocation from './components/location-reviews/add-location-review'
+import DeleteLocationReview from './components/location-reviews/delete-location-review'
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,8 @@ class App extends Component {
                     <Stack.Screen name= "GetUserDetails" component={GetUserDetails}options={{title: "User Details"}}/>
                     <Stack.Screen name= "FindLocations" component={FindLocations}options={{title: "Find Locations"}}/>
                     <Stack.Screen name= "AddReviewToLocation" component={AddReviewToLocation}options={{title: "Add review"}}/>
+                    <Stack.Screen name= "DeleteLocationReview" component={DeleteLocationReview}options={{title: "Delete review"}}/>
+
                 </Stack.Navigator>
             </NavigationContainer>
 

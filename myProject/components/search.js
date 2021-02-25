@@ -75,6 +75,10 @@ class Search extends Component {
                     title="Add Review"
                     onPress={() => navigation.navigate('AddReviewToLocation')}
                 />
+                <Button
+                    title=" Delete Review"
+                    onPress={() => navigation.navigate('DeleteLocationReview')}
+                />
 
             </View>
         );
