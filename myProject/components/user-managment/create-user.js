@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Alert } from 'react-native';
+import { Text, TextInput, View, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class CreateUser extends Component {
@@ -16,50 +16,9 @@ class CreateUser extends Component {
         }
     }
 
-
-    render() {
-        //add some error handling for email password and such.
-        return (
-            <View>
-                <Text>First name</Text>
-                <TextInput
-                    placeholder="Enter first name..."
-                    onChangeText={(first_name) => this.setState({ first_name })}
-                    value={this.state.first_name}
-                />
-                <Text>Last name</Text>
-
-                <TextInput
-                    placeholder="Enter last name..."
-                    onChangeText={(last_name) => this.setState({ last_name })}
-                    value={this.state.last_name}
-                />
-                <Text>Email</Text>
-
-                <TextInput
-                    placeholder="Enter email..."
-                    onChangeText={(email) => this.setState({ email })}
-                    value={this.state.email}
-                />
-                <Text>Password</Text>
-
-                <TextInput
-                    placeholder="Enter password..."
-                    onChangeText={(password) => this.setState({ password })}
-                    value={this.state.password}
-                />
-                <Button
-                    title="Create account"
-                    onPress={() => this.addUser()}
-                />
-            </View>
-        );
-    }
-
-
     addUser = async () => {
 
-        const to_send = { password: this.state.password,first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email };
+        const to_send = { password: this.state.password, first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email };
 
         try {
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0/user', {
@@ -89,9 +48,8 @@ class CreateUser extends Component {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-                console.log("Account Created.")
-                //console.log(to_send)
-            console.log(await AsyncStorage.getItem('id'))
+            console.log("Account Created.")
+
             const navigation = this.props.navigation;
             navigation.navigate('Login')
         }
@@ -99,5 +57,98 @@ class CreateUser extends Component {
             console.log(error)
         }
     }
+
+    render() {
+        return (
+            <View>
+                <ScrollView>
+
+                    <Text styles={styles.title}>Create an Account</Text>
+
+                    <View styles={styles.formItem}>
+                        <Text styles={styles.formLabel}>First name</Text>
+                        <TextInput styles={styles.formInput}
+                            placeholder="Enter first name..."
+                            onChangeText={(first_name) => this.setState({ first_name })}
+                            value={this.state.first_name}
+                        />
+                    </View>
+
+                    <View styles={styles.formItem}>
+                        <Text styles={styles.formLabel} >Last name</Text>
+                        <TextInput styles={styles.formInput}
+                            placeholder="Enter last name..."
+                            onChangeText={(last_name) => this.setState({ last_name })}
+                            value={this.state.last_name}
+                        />
+                    </View>
+
+                    <View styles={styles.formItem}>
+                        <Text styles={styles.formLabel}>Email</Text>
+                        <TextInput styles={styles.formInput}
+                            placeholder="Enter email..."
+                            onChangeText={(email) => this.setState({ email })}
+                            value={this.state.email}
+                        />
+                    </View>
+
+                    <View styles={styles.formItem}>
+                        <Text styles={styles.formLabel}>Password</Text>
+                        <TextInput styles={styles.formInput}
+                            placeholder="Enter password..."
+                            onChangeText={(password) => this.setState({ password })}
+                            value={this.state.password}
+                        />
+                    </View>
+
+                    <View styles ={styles.formItem}>
+                        <TouchableOpacity style= {styles.formTouch}
+                        onPress={() => this.addUser()}          
+                        />
+                        <Text styles = {styles.formTouch}>
+                            Sign Up
+                        </Text>
+                    </View>
+
+                </ScrollView>
+            </View>
+        );
+    }
 }
+
+const styles = StyleSheet.create({
+    title: {
+        color: 'black',
+        backgroundColor: 'lightgray',
+        padding: 10,
+        fontSize: 50
+    },
+    formItem: {
+        padding: 20
+    },
+    formLabel: {
+        fontSize: 15,
+        color: 'black'
+    },
+    formInput: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5
+    },
+    formTouch: {
+        padding: 10,
+        alignItems: 'center'
+    },
+    formTouchText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black'
+    }
+
+
+
+})
+
 export default CreateUser;
+
+

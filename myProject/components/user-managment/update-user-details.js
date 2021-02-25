@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Text, TextInput, View, Button, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -24,7 +24,7 @@ class UpdateUserDetails extends Component {
         catch (error) {
             console.log(error)
         }
-        console.log('Users id ' + this.state.id + 'users token ' + this.state.token)
+        console.log('Users id ' + this.state.id + ' users token ' + this.state.token)
     }
 
     render() {

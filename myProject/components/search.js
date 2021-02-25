@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, TextInput, View, Button, Alert } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import Stars from 'react-native-stars'
 
 class Search extends Component {
 
@@ -14,10 +12,10 @@ class Search extends Component {
             location_review: 1,
             review_id: 1,
             string: '',
-            overall_rating: 0,
-            price_rating: 0,
-            quality_rating: 0,
-            cleniness_rating: 0,
+            overall_rating: 1,
+            price_rating: 1,
+            quality_rating: 1,
+            cleniness_rating: 1,
             search_in: '',
             limit: 5,
             offset: 0,
@@ -26,15 +24,6 @@ class Search extends Component {
     }
 
 
-    //replace for token being passed in through container
-    componentDidMount = async () => {
-        try {
-            this.setState({ 'token': await AsyncStorage.getItem('token') })
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
     render() {
         const navigation = this.props.navigation;
         return (
@@ -44,26 +33,34 @@ class Search extends Component {
                     onChangeText={(string) => this.setState({ string })}
                     value={this.state.string}
                 />
-                <TextInput
-                    placeholder="Overll rating..."
-                    onChangeText={(overall_rating) => this.setState({ overall_rating })}
-                    value={this.state.overall_rating}
+                <Text>Overall Rating</Text>
+                <Stars
+                    half={true}
+                    default={this.state.overall_rating}
+                    update={(val) => this.setState({ overall_rating: val })}
                 />
-                <TextInput
-                    placeholder="pring ratinf..."
-                    onChangeText={(price_rating) => this.setState({ price_rating })}
-                    value={this.state.price_rating}
+
+                <Text>Price Rating</Text>
+                <Stars
+                    half={true}
+                    default={this.state.price_rating}
+                    update={(val) => this.setState({ price_rating: val })}
                 />
-                <TextInput
-                    placeholder="quality rating..."
-                    onChangeText={(quality_rating) => this.setState({ quality_rating })}
-                    value={this.state.quality_rating}
+
+                <Text>Quality Rating</Text>
+                <Stars
+                    half={true}
+                    default={this.state.quality_rating}
+                    update={(val) => this.setState({ quality_rating: val })}
                 />
-                <TextInput
-                    placeholder="clenliness..."
-                    onChangeText={(cleniness_rating) => this.setState({ cleniness_rating })}
-                    value={this.state.cleniness_rating}
+
+                <Text>Clenliness Rating</Text>
+                <Stars
+                    half={true}
+                    default={this.state.cleniness_rating}
+                    update={(val) => this.setState({ cleniness_rating: val })}
                 />
+
                 <TextInput
                     placeholder="search in..."
                     onChangeText={(search_in) => this.setState({ search_in })}
@@ -86,37 +83,13 @@ class Search extends Component {
                     onPress={() => navigation.navigate('DeleteLocationReview')}
                 />
                 <Button
-                    title=" get photo Review"
-                    onPress={() => this.getPhotoReview()}
+                    title=" add photo Review"
+                    onPress={() => navigation.navigate('AddPhotoToReview')}
                 />
 
             </View>
         );
     }
-    getPhotoReview = async () => {
-        try {
-            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Authorization': this.state.token
-                },
-            })
-                .then(response => {
-                    return response.json()
-                })
-                .catch((error) => {
-                    //console.error('Error:', error);
-                });
-            //go back 
-            // const navigation = this.props.navigation;
-            // navigation.navigate('HomeNavigation')
 
-        }
-        catch (error) {
-            console.log(error)
-        }
-
-    }
 }
 export default Search;

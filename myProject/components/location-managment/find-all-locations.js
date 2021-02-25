@@ -11,32 +11,32 @@ class FindLocations extends Component {
         super(props);
 
         this.state = {
-            data: [{}],
+            location_data: null,
             token: '',
             loading: true,
 
             //props recived from search
-            clenliness_rating: '',
-            overall_rating: '',
-            price_rating: '',
-            quality_rating: '',
-            latitude: 0,
-            location_id: '',
-            location_name: '',
-            location_reviews: [],
-            location_town: '',
-            longitude: '',
-            photo_path: '',
+            // clenliness_rating: '',
+            // overall_rating: '',
+            // price_rating: '',
+            // quality_rating: '',
+            // latitude: 0,
+            // location_id: '',
+            // location_name: '',
+            // location_reviews: [],
+            // location_town: '',
+            // longitude: '',
+            // photo_path: '',
 
             //props used to searcg
-            string: '',
-            input_overall_rating: '',
-            input_price_rating: '',
-            input_quality_rating: '',
-            input_cleniness_rating: '',
-            search_in: '',
-            limit: 0,
-            offset: 0,
+            // string: '',
+            // input_overall_rating: '',
+            // input_price_rating: '',
+            // input_quality_rating: '',
+            // input_cleniness_rating: '',
+            // search_in: '',
+            // limit: 0,
+            // offset: 0,
         }
     }
 
@@ -59,16 +59,20 @@ class FindLocations extends Component {
                     'X-Authorization': this.state.token
                 },
             })
-                .then(response => {
-                    return response.json()
+                .then(responseData => {
+                    this.setState({
+                        loading: false
+                    })
+                    return responseData.json();
                 })
                 .then(responseData => {
-                    this.setState({ data: responseData })
-
-                    //console.log(this.state.data)
-                    return responseData
+                    this.setState({
+                        location_data: responseData
+                    })
+                    console.log('This is the state ' + JSON.stringify(this.state.location_data))
                 })
                 .catch((error) => {
+
                     console.error('Error:', error);
                 });
         }
@@ -78,23 +82,21 @@ class FindLocations extends Component {
 
     }
     render() {
-
-
         return (
 
             <View>
-                <Text>Hey</Text>
-                <List>
-                    <FlatList
-                        data={this.state.data}
-                        renderItem={({ locationDetails }) => (
-                            <View>
-                                <Text>{locationDetails.location_name}</Text>
-                            </View>
-                        )}
-                        keyExtractor={(locationDetails, index) => locationDetails.location_id}
-                    />
-                </List>
+                <Text>Locations</Text>
+
+                <FlatList
+                    data={this.state.location_data}
+                    renderItem={({ item }) => (
+                        <View>
+                            <Text>{item.location_name}</Text>
+                        </View>
+                    )}
+                    keyExtractor={(item, index) => item.id}
+                />
+
             </View>
         )
     }
