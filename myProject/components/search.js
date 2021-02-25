@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, TextInput, View, Button, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -69,6 +70,10 @@ class Search extends Component {
                 <Button
                     title="find locations"
                     onPress={() => navigation.navigate('FindLocations')}
+                />
+                <Button
+                    title="Add Review"
+                    onPress={() => navigation.navigate('AddReviewToLocation')}
                 />
 
             </View>
