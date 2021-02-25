@@ -90,6 +90,7 @@ class Login extends Component {
             console.log(await AsyncStorage.getItem('token'))
             const navigation = this.props.navigation;
             navigation.navigate('HomeNavigation')
+
         }
         catch (error) {
             console.log(error)
