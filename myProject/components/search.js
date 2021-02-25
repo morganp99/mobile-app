@@ -11,6 +11,8 @@ class Search extends Component {
         super(props);
 
         this.state = {
+            location_review: 1,
+            review_id: 1,
             string: '',
             overall_rating: 0,
             price_rating: 0,
@@ -79,9 +81,42 @@ class Search extends Component {
                     title=" Delete Review"
                     onPress={() => navigation.navigate('DeleteLocationReview')}
                 />
+                <Button
+                    title=" Delete Review"
+                    onPress={() => navigation.navigate('DeleteLocationReview')}
+                />
+                <Button
+                    title=" get photo Review"
+                    onPress={() => this.getPhotoReview()}
+                />
 
             </View>
         );
+    }
+    getPhotoReview = async () => {
+        try {
+            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Authorization': this.state.token
+                },
+            })
+                .then(response => {
+                    return response.json()
+                })
+                .catch((error) => {
+                    //console.error('Error:', error);
+                });
+            //go back 
+            // const navigation = this.props.navigation;
+            // navigation.navigate('HomeNavigation')
+
+        }
+        catch (error) {
+            console.log(error)
+        }
+
     }
 }
 export default Search;
