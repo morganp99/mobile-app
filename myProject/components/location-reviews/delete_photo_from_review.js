@@ -5,7 +5,7 @@ import { Text, TextInput, View, Button, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class AddPhotoToReview extends Component {
+class DeletePhotoFromreview extends Component {
 
     constructor(props) {
         super(props);
@@ -34,20 +34,20 @@ class AddPhotoToReview extends Component {
             <View>
                 <Button
                     title="Delete review"
-                    onPress={() => this.addPhotoToReview()}
+                    onPress={() => this.deletPhotoFromReview()}
                 />
             </View>
         );
     }
 
 
-    addPhotoToReview = async () => {
+    deletPhotoFromReview = async () => {
 
 
         try {
             
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0//location/'+loc_id+'/review/'+rev_id+'/photo', {
-                method: 'POST',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Authorization': this.state.token
@@ -73,4 +73,4 @@ class AddPhotoToReview extends Component {
 
     }
 }
-export default AddPhotoToReview;
+export default DeletePhotoFromreview;
