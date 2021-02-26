@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Alert, FlatList } from 'react-native';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Home extends Component {
@@ -65,19 +65,18 @@ class Home extends Component {
     render() {
         return (
 
-            <View>
-                <Text>Favourite Locations</Text>
-
+            <View style = {styles.flexContainer}>
+                <Text style={styles.title}>Favourite Locations</Text>
                 <FlatList
                     data={this.state.location_data}
                     renderItem={({ item }) => (
-                        <View>
-                            <Text>Name: {item.location_name}</Text>
-                            <Text>Town: {item.location_town}</Text>
-                            <Text>Quality Rating: {item.avg_quality_rating}</Text>
-                            <Text>Price Rating: {item.avg_price_rating}</Text>
-                            <Text>Quality Rating: {item.avg_quality_rating}</Text>
-                            <Text>Clenliness Rating: {item.avg_clenliness_rating}</Text>
+                        <View style = {styles.outline}>
+                            <Text style={styles.outputTitleText}>Loaction: {item.location_name}</Text>
+                            <Text style ={styles.outputText}>Town: {item.location_town}</Text>
+                            <Text style ={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
+                            <Text style ={styles.outputText}>Price Rating: {item.avg_price_rating}</Text>
+                            <Text style ={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
+                            <Text style ={styles.outputText}>Clenliness Rating: {item.avg_clenliness_rating}</Text>
                         </View>
                     )}
                     keyExtractor={(item, index) => item.id}
@@ -88,3 +87,26 @@ class Home extends Component {
     }
 }
 export default Home;
+
+const styles = StyleSheet.create({
+    
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'sandybrown'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    outputTitleText: {
+        fontSize: 20
+    },
+    outputText:{
+        fontSize: 18
+    },
+    outline : {
+        borderWidth: 2,
+        borderColor: 'sienna'
+    }
+})

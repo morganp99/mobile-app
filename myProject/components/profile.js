@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationHelpersContext } from '@react-navigation/native';
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Alert } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 
 
 class Profile extends Component {
@@ -34,14 +34,13 @@ class Profile extends Component {
         console.log('Users id ' + this.state.id + ' users token ' + this.state.token)
     }
 
-    
+
     render() {
         const navigation = this.props.navigation;
         //add logout button here aswell.
         return (
-            <View>
-                <Text>Profile</Text>
-                <Button
+            <View style = {styles.flexContainer}>
+                <Button style = {styles.buttonStyle}
                     title="Update Details"
                     onPress={() => navigation.navigate('UpdateUserDetails')}
                 />
@@ -75,3 +74,29 @@ class Profile extends Component {
 
 }
 export default Profile;
+
+const styles = StyleSheet.create({
+    
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'sandybrown'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    outputTitleText: {
+        fontSize: 20
+    },
+    outputText:{
+        fontSize: 18
+    },
+    outline : {
+        borderWidth: 2,
+        borderColor: 'sienna'
+    },
+    buttonStyle :{
+        backgroundColor: 'black'
+    }
+})

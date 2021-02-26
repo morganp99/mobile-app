@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Text, TextInput, View, Button, Alert, FlatList, Stars } from 'react-native';
+import { Text, TextInput, View, Button, Alert, FlatList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -117,19 +117,24 @@ class FindLocations extends Component {
         const navigation = this.props.navigation;
         return (
 
-            <View>
-                <Text>FIND ALL Locations</Text>
-
+            <View style={styles.flexContainer}>
                 <FlatList
                     data={this.state.location_data}
                     renderItem={({ item }) => (
-                        <View>
-                            <Text>Name: {item.location_name}</Text>
-                            <Text>Town: {item.location_town}</Text>
-                            <Text>Quality Rating: {item.avg_quality_rating}</Text>
-                            <Text>Price Rating: {item.avg_price_rating}</Text>
-                            <Text>Quality Rating: {item.avg_quality_rating}</Text>
-                            <Text>Clenliness Rating: {item.avg_clenliness_rating}</Text>
+
+
+                        <View style = {styles.flexContainer}>
+                <Text style={styles.title}>Favourite Locations</Text>
+                <FlatList
+                    data={this.state.location_data}
+                    renderItem={({ item }) => (
+                        <View style = {styles.outline}>
+                            <Text style={styles.outputTitleText}>Loaction: {item.location_name}</Text>
+                            <Text style ={styles.outputText}>Town: {item.location_town}</Text>
+                            <Text style ={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
+                            <Text style ={styles.outputText}>Price Rating: {item.avg_price_rating}</Text>
+                            <Text style ={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
+                            <Text style ={styles.outputText}>Clenliness Rating: {item.avg_clenliness_rating}</Text>
                             <Button
                                 title="Add Review"
                                 onPress={() => navigation.navigate('AddReviewToLocation',
@@ -151,8 +156,12 @@ class FindLocations extends Component {
                                 title="unFavourite Location"
                                 onPress={() => this.unFavouriteLocation(item.location_id)}
                             />
-
                         </View>
+                    )}
+                    keyExtractor={(item, index) => item.id}
+                />
+
+            </View>
                     )}
                     keyExtractor={(item, index) => item.id}
                 />
@@ -165,4 +174,29 @@ class FindLocations extends Component {
 
 export default FindLocations;
 
+const styles = StyleSheet.create({
+
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'sandybrown'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    outputTitleText: {
+        fontSize: 20
+    },
+    outputText: {
+        fontSize: 18
+    },
+    outline: {
+        borderWidth: 2,
+        borderColor: 'sienna'
+    },
+    buttonStyle: {
+        backgroundColor: 'black'
+    }
+})
 

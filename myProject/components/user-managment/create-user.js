@@ -60,41 +60,41 @@ class CreateUser extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.flexContainer}>
                 <ScrollView>
 
-                    <Text styles={styles.title}>Create an Account</Text>
+                    <Text style={styles.title}>Create an Account</Text>
 
-                    <View styles={styles.formItem}>
-                        <Text styles={styles.formLabel}>First name</Text>
-                        <TextInput styles={styles.formInput}
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>First name</Text>
+                        <TextInput style={styles.formInput}
                             placeholder="Enter first name..."
                             onChangeText={(first_name) => this.setState({ first_name })}
                             value={this.state.first_name}
                         />
                     </View>
 
-                    <View styles={styles.formItem}>
-                        <Text styles={styles.formLabel} >Last name</Text>
-                        <TextInput styles={styles.formInput}
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel} >Last name</Text>
+                        <TextInput style={styles.formInput}
                             placeholder="Enter last name..."
                             onChangeText={(last_name) => this.setState({ last_name })}
                             value={this.state.last_name}
                         />
                     </View>
 
-                    <View styles={styles.formItem}>
-                        <Text styles={styles.formLabel}>Email</Text>
-                        <TextInput styles={styles.formInput}
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Email</Text>
+                        <TextInput style={styles.formInput}
                             placeholder="Enter email..."
                             onChangeText={(email) => this.setState({ email })}
                             value={this.state.email}
                         />
                     </View>
 
-                    <View styles={styles.formItem}>
-                        <Text styles={styles.formLabel}>Password</Text>
-                        <TextInput styles={styles.formInput}
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Password</Text>
+                        <TextInput style={styles.formInput}
                             placeholder="Enter password..."
                             onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
@@ -102,8 +102,6 @@ class CreateUser extends Component {
                     </View>
 
                     <View styles={styles.formItem}>
-
-    
 
                         <Button
                             title="Sign Up!"
@@ -117,39 +115,31 @@ class CreateUser extends Component {
     }
 }
 
+
+export default CreateUser;
+
 const styles = StyleSheet.create({
+
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'sandybrown'
+    },
     title: {
         color: 'black',
-        backgroundColor: 'lightgray',
         padding: 10,
-        fontSize: 50
+        fontSize: 25
     },
     formItem: {
         padding: 20
     },
     formLabel: {
-        fontSize: 15,
+        backgroundColor: 'sienna',
+        fontSize: 20,
         color: 'black'
     },
     formInput: {
-        borderWidth: 1,
-        borderColor: 'gray',
+        borderWidth: 2,
+        borderColor: 'sienna',
         borderRadius: 5
     },
-    formTouch: {
-        padding: 10,
-        alignItems: 'center'
-    },
-    formTouchText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'black'
-    }
-
-
-
 })
-
-export default CreateUser;
-
-

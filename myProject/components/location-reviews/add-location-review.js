@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Stars } from 'react-native';
+import { Text, TextInput, View, Button, StyleSheet, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -38,9 +38,6 @@ class AddReviewToLocation extends Component {
 
 
     addReview = async () => {
-        console.log('Overall rating' + this.state.overall_rating)
-
-
         const to_send = {
             overall_rating: this.state.overall_rating,
             price_rating: this.state.price_rating,
@@ -64,8 +61,6 @@ class AddReviewToLocation extends Component {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-
-
         }
         catch (error) {
             console.log(error)
@@ -89,48 +84,109 @@ class AddReviewToLocation extends Component {
         this.getData()
     }
 
-
     render() {
         const navigation = this.props.navigation;
         return (
-            <View>
 
-                <Text>Clenliness Rating</Text>
-                {/* <Stars
-                    half={true}
-                    default={this.state.clenliness_rating}
-                    update={(val) => this.setState({ clenliness_rating: val })}
-                /> */}
+            <View style={styles.flexContainer}>
+                <ScrollView>
 
+                    <Text style={styles.title}>Add Review</Text>
 
-                <View>
-                    <Text>Feedback</Text>
-                    <TextInput
-                        placeholder="feedback"
-                        onChangeText={(review_body) => this.setState({ review_body })}
-                        value={this.state.review_body}
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Overall Rating</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter Overall rating 0-5"
+                            onChangeText={(overall_rating) => this.setState({ overall_rating })}
+                            value={this.state.overall_rating}
+                        />
+                    </View>
+
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel} >Price Rating</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter Price rating 0-5"
+                            onChangeText={(price_rating) => this.setState({ price_rating })}
+                            value={this.state.price_rating}
+                        />
+                    </View>
+
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Quality Rating</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter Quality rating 0-5"
+                            onChangeText={(quality_rating) => this.setState({ quality_rating })}
+                            value={this.state.quality_rating}
+                        />
+                    </View>
+
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Clenliness Rating</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter Clenliness rating 0-5"
+                            onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
+                            value={this.state.clenliness_rating}
+                        />
+                    </View>
+
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Feedback</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter Feedback"
+                            onChangeText={(review_body) => this.setState({ review_body })}
+                            value={this.state.review_body}
+                        />
+                    </View>
+
+                    <View styles={styles.formItem}>
+
+                    </View>
+                    <Button
+                        title="Add review"
+                        onPress={() => this.addReview()}
                     />
-                </View>
 
-                <Button
-                    title="Add review"
-                    onPress={() => this.addReview()}
-                />
+                    <Button
+                        title="Attatch Photo"
+                        onPress={() => this.addPhotoToReview()}
+                    />
 
-                <Button
-                    title="Attatch Photo"
-                    onPress={() => this.addPhotoToReview()}
-                />
+                    {/* <Button
+                            title="Take Photo"
+                            onPress={() => navigation.navigate('TakePhotoForReview')}
+                        /> */}
 
-                <Button
-                    title="Take Photo"
-                    onPress={() => navigation.navigate('TakePhotoForReview')}
-                //send name review body and all 4 ratings
-
-                />
+                </ScrollView>
             </View>
+
         );
     }
 
 }
 export default AddReviewToLocation;
+
+const styles = StyleSheet.create({
+
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'sandybrown'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    formItem: {
+        padding: 20
+    },
+    formLabel: {
+        backgroundColor: 'sienna',
+        fontSize: 20,
+        color: 'black'
+    },
+    formInput: {
+        borderWidth: 2,
+        borderColor: 'sienna',
+        borderRadius: 5
+    },
+})

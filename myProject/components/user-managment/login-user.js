@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Aler } from 'react-native';
+import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -23,22 +23,27 @@ class Login extends Component {
 
         //add some error handling for email password and such.
         return (
-            <View>
+            <View style ={styles.flexContainer}>
 
-                <Text>Email</Text>
+                <Text style = {styles.title}>Email</Text>
 
-                <TextInput
-                    placeholder="Enter email..."
-                    onChangeText={(email) => this.setState({ email })}
-                    value={this.state.email}
-                />
-                <Text>Password</Text>
+                <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Email</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter email..."
+                            onChangeText={(email) => this.setState({ email })}
+                            value={this.state.email}
+                        />
+                    </View>
 
-                <TextInput
-                    placeholder="Enter password..."
-                    onChangeText={(password) => this.setState({ password })}
-                    value={this.state.password}
-                />
+                    <View style={styles.formItem}>
+                        <Text style={styles.formLabel}>Password</Text>
+                        <TextInput style={styles.formInput}
+                            placeholder="Enter password..."
+                            onChangeText={(password) => this.setState({ password })}
+                            value={this.state.password}
+                        />
+                    </View>
                 <Button
                     title="Login"
                     onPress={() => this.loginUser()}
@@ -99,3 +104,29 @@ class Login extends Component {
     }
 }
 export default Login;
+
+const styles = StyleSheet.create({
+    
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'sandybrown'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    formItem: {
+        padding: 20
+    },
+    formLabel: {
+        backgroundColor: 'sienna',
+        fontSize: 20,
+        color: 'black'
+    },
+    formInput: {
+        borderWidth: 2,
+        borderColor: 'sienna',
+        borderRadius: 5
+    },
+})

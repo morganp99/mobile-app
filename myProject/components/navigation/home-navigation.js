@@ -7,7 +7,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from '../home';
 import Search from '../search';
 import Profile from '../profile';
-import Camera from '../camera';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +29,6 @@ class HomeNavigation extends Component {
                             iconName = focused ? 'home' : 'home-outline';
                         }
 
-                        // You can return any component that you like here!
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
                 })}
@@ -42,7 +40,6 @@ class HomeNavigation extends Component {
                 <Tab.Screen name="Profile" component={Profile} />
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Search" component={Search} />
-                <Tab.Screen name="Camera" component={Camera}/>
             </Tab.Navigator>
         );
     }
