@@ -84,10 +84,6 @@ class Search extends Component {
                     onPress={() => navigation.navigate('FindLocations', {string : this.state.string,})}
                 />
                 <Button
-                    title="Add Review"
-                    onPress={() => navigation.navigate('AddReviewToLocation')}
-                />
-                <Button
                     title=" Delete Review"
                     onPress={() => navigation.navigate('DeleteLocationReview')}
                 />

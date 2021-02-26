@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Alert } from 'react-native';
+import { Text, TextInput, View, Button, Stars } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -12,16 +12,20 @@ class AddReviewToLocation extends Component {
 
         this.state = {
             location_id: 1,
-            overall_rating: 4,
-            price_rating: 2,
-            quality_rating: 3,
-            clenliness_rating: 5,
+            overall_rating: 1,
+            price_rating: 1,
+            quality_rating: 1,
+            clenliness_rating: 1,
             review_body: "Great coffee, but the bathrooms stank!",
             token: ''
         }
     }
 
-    componentDidMount = async () => {
+    componentDidMount() {
+        this.getData()
+    }
+
+    getData = async () => {
         try {
             this.setState({ 'token': await AsyncStorage.getItem('token') })
         }
@@ -37,38 +41,51 @@ class AddReviewToLocation extends Component {
         return (
             <View>
 
-                <Text>Overall Rating</Text>
+                {/* <View>
+                    <Text>Overall Rating</Text>
+                    <Stars
+                        half={true}
+                        default={this.state.overall_rating}
+                        update={(val) => this.setState({ overall_rating: val })}
+                    />
+                </View>
 
-                <TextInput
-                    placeholder="Overall rating"
-                    onChangeText={(overall_rating) => this.setState({ overall_rating })}
-                    value={this.state.overall_rating}
-                />
-                <Text>Price Rating</Text>
+                <View>
+                    <Text>Price Rating</Text>
+                    <Stars
+                        half={true}
+                        default={this.state.price_rating}
+                        update={(val) => this.setState({ price_rating: val })}
+                    />
+                </View>
 
-                <TextInput
-                    placeholder="price rating"
-                    onChangeText={(price_rating) => this.setState({ price_rating })}
-                    value={this.state.price_rating}
-                />
-                <Text>Quality Rating</Text>
-                <TextInput
-                    placeholder="qualityrating"
-                    onChangeText={(quality_rating) => this.setState({ quality_rating })}
-                    value={this.state.quality_rating}
-                />
-                <Text>Clenliness rating</Text>
-                <TextInput
-                    placeholder="clenliness rating"
-                    onChangeText={(cleniness_rating) => this.setState({ cleniness_rating })}
-                    value={this.state.cleniness_rating}
-                />
-                <Text>Feedback</Text>
-                <TextInput
-                    placeholder="feedback"
-                    onChangeText={(review_body) => this.setState({ review_body })}
-                    value={this.state.review_body}
-                />
+                <View>
+                    <Text>Quality Rating</Text>
+                    <Stars
+                        half={true}
+                        default={this.state.quality_rating}
+                        update={(val) => this.setState({ quality_rating: val })}
+                    />
+                </View>
+
+                <View>
+                    <Text>Clenliness rating</Text>
+                    <Stars
+                        half={true}
+                        default={this.state.clenliness_rating}
+                        update={(val) => this.setState({ clenliness_rating: val })}
+                    />
+                </View> */}
+
+                <View>
+                    <Text>Feedback</Text>
+                    <TextInput
+                        placeholder="feedback"
+                        onChangeText={(review_body) => this.setState({ review_body })}
+                        value={this.state.review_body}
+                    />
+                </View>
+
                 <Button
                     title="Add review"
                     onPress={() => this.addReview()}
@@ -79,10 +96,12 @@ class AddReviewToLocation extends Component {
 
 
     addReview = async () => {
+        console.log('Overall rating' + this.state.overall_rating)
+
 
         const to_send = {
             overall_rating: this.state.overall_rating,
-            price_rating: this.state.price_rating, 
+            price_rating: this.state.price_rating,
             quality_rating: this.state.quality_rating,
             clenliness_rating: this.state.clenliness_rating,
             review_body: this.state.review_body,
@@ -94,6 +113,7 @@ class AddReviewToLocation extends Component {
                     'Content-Type': 'application/json',
                     'X-Authorization': this.state.token
                 },
+
                 body: JSON.stringify(to_send),
             })
                 .then(response => {
@@ -102,7 +122,7 @@ class AddReviewToLocation extends Component {
                 .catch((error) => {
                     //console.error('Error:', error);
                 });
-                //go back 
+            //go back 
             // const navigation = this.props.navigation;
             // navigation.navigate('HomeNavigation')
 

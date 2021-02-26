@@ -85,6 +85,7 @@ class FindLocations extends Component {
 
     }
     render() {
+        const navigation = this.props.navigation;
         return (
 
             <View>
@@ -100,6 +101,13 @@ class FindLocations extends Component {
                             <Text>Price Rating: {item.avg_price_rating}</Text>
                             <Text>Quality Rating: {item.avg_quality_rating}</Text>
                             <Text>Clenliness Rating: {item.avg_clenliness_rating}</Text>
+
+                            
+                            <Button
+                                title="Add Review"
+                                onPress={() => navigation.navigate('AddReviewToLocation')}
+                            />
+
                         </View>
                     )}
                     keyExtractor={(item, index) => item.id}
