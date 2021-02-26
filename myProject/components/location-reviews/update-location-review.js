@@ -39,14 +39,6 @@ class GetLocationReviews extends Component {
 
 
     findLocations = async () => {
-
-        const to_send = {
-            overall_rating: this.state.overall_rating,
-            price_rating: this.state.price_rating,
-            quality_rating: this.state.quality_rating,
-            clenliness_rating: this.state.clenliness_rating,
-            review_body: this.state.review_body,
-        }
         try {
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id +
 
@@ -56,7 +48,6 @@ class GetLocationReviews extends Component {
                     'Content-Type': 'application/json',
                     'X-Authorization': this.state.token
                 },
-                body: JSON.stringify(to_send),
             })
                 .then(responseData => {
                     this.setState({
@@ -101,10 +92,17 @@ class GetLocationReviews extends Component {
     }
 
 
-    updateReview() {
+    updateReview(location_id, review_id) {
 
+        const to_send = {
+            overall_rating: this.state.overall_rating,
+            price_rating: this.state.price_rating,
+            quality_rating: this.state.quality_rating,
+            clenliness_rating: this.state.clenliness_rating,
+            review_body: this.state.review_body,
+        }
 
-        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -115,6 +113,7 @@ class GetLocationReviews extends Component {
                 console.error('Error:', error);
             });
         this.getData()
+        //navigate back 
     }
 
     render() {
@@ -122,7 +121,7 @@ class GetLocationReviews extends Component {
         return (
 
             <View>
-                <Text>Update Review</Text>
+                <Text>Update LOCATION Review</Text>
                 <Text>Name: {this.state.location_data.location_name} add this to what ever gete passed in by name </Text>
                 <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
                 <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>

@@ -40,15 +40,15 @@ class GetLocationReviews extends Component {
 
     findLocations = async () => {
         try {
-            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id +
+            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id,
 
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Authorization': this.state.token
-                },
-            })
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Authorization': this.state.token
+                    },
+                })
                 .then(responseData => {
                     this.setState({
                         loading: false
@@ -59,8 +59,8 @@ class GetLocationReviews extends Component {
                     this.setState({
                         location_data: responseData
                     })
-                    console.log('This is the state ' + JSON.stringify(this.state.location_data))
-                    console.log('This is the review body ' + JSON.stringify(this.state.location_data.location_reviews))
+                    //console.log('This is the state ' + JSON.stringify(this.state.location_data))
+                    //console.log('This is the review body ' + JSON.stringify(this.state.location_data.location_reviews))
                 })
                 .catch((error) => {
 
@@ -89,7 +89,7 @@ class GetLocationReviews extends Component {
         this.getData()
     }
 
-    updateReview() {
+    updateReview(location_id, review_id) {
         console.log("this is location id " + location_id)
         console.log("this is review id " + review_id)
 
@@ -106,13 +106,41 @@ class GetLocationReviews extends Component {
         this.getData()
     }
 
+    likeReview(location_id, review_id) {
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id + '/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': this.state.token
+            },
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        this.getData()
+    }
+
+    dislikeReview(location_id, review_id) {
+        console.log('LOcation and review ID _----------------'+location_id + review_id)
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id + '/like', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': this.state.token
+            },
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        this.getData()
+    }
 
     render() {
         const navigation = this.props.navigation;
         return (
 
             <View>
-                <Text>Get Location Reviews</Text>
+                <Text>GET LOACTION REVIEW</Text>
                 <Text>Name: {this.state.location_data.location_name}</Text>
                 <Text>location ID {this.state.location_data.location_id}</Text>
 
@@ -165,7 +193,20 @@ class GetLocationReviews extends Component {
                             <Button
                                 title="Edit Review"
                                 onPress={() => navigation.navigate('UpdateLocationReview')}
-                                //send name review body and all 4 ratings
+                            //send name review body and all 4 ratings
+
+                            />
+                            <Button
+                                title="Like Review"
+                                onPress={() => this.likeReview(this.state.location_data.location_id, item.review_id)}
+                            //send name review body and all 4 ratings
+
+                            />
+                            <Text>change location id to be passed in with param not state</Text>
+                            <Button
+                                title="Dislike Review"
+                                onPress={() => this.dislikeReview(this.state.location_data.location_id, item.review_id)}
+                            //send name review body and all 4 ratings
 
                             />
                         </View>

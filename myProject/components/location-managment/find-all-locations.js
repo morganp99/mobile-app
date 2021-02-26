@@ -118,6 +118,7 @@ class FindLocations extends Component {
                                 {location_id : item.location_id},
                                 {location_data : this.state.location_data}
                                 )}
+                                //add location id and location data here 
                             />
                         
                         </View>
