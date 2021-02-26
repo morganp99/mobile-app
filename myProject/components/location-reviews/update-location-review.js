@@ -94,6 +94,7 @@ class GetLocationReviews extends Component {
 
     updateReview(location_id, review_id) {
 
+        console.log('This is the review and location ID ----------------------------'+location_id + review_id)
         const to_send = {
             overall_rating: this.state.overall_rating,
             price_rating: this.state.price_rating,
@@ -116,6 +117,11 @@ class GetLocationReviews extends Component {
         //navigate back 
     }
 
+
+
+
+
+
     render() {
         const navigation = this.props.navigation;
         return (
@@ -137,6 +143,7 @@ class GetLocationReviews extends Component {
                     title="Clear Review Body"
                     onPress={() => this.setState({review_body : ''})}
                 />
+                <Text>ADD LOCATION AND REVIEW ID TO UPDATE REVIEW</Text>
                 <Button
                     title="Update Review"
                     onPress={() => this.updateReview()}

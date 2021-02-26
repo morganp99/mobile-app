@@ -14,27 +14,11 @@ class FindLocations extends Component {
             loading: true,
 
             //props recived from search
-            // clenliness_rating: '',
-            // overall_rating: '',
-            // price_rating: '',
-            // quality_rating: '',
-            // latitude: 0,
-            // location_id: '',
-            // location_name: '',
-            // location_reviews: [],
-            // location_town: '',
-            // longitude: '',
-            // photo_path: '',
-
-            //props used to searcg
-            // string: '',
-            // input_overall_rating: '',
-            // input_price_rating: '',
-            // input_quality_rating: '',
-            // input_cleniness_rating: '',
-            // search_in: '',
-            // limit: 0,
-            // offset: 0,
+            clenliness_rating: '',
+            overall_rating: '',
+            price_rating: '',
+            quality_rating: '',
+            string: ''
         }
     }
 
@@ -48,8 +32,10 @@ class FindLocations extends Component {
         try {
             this.setState({ 'token': await AsyncStorage.getItem('token') })
             this.state.string = this.props.route.params.string
-            console.log('Look at me !')
-            console.log('This is the string    ' + this.state.string)
+            this.state.overall_rating = this.props.route.params.overall_rating
+            this.state.price_rating = this.props.route.params.price_rating
+            this.state.quality_rating = this.props.route.params.quality_rating
+            this.state.clenliness_rating = this.props.route.params.clenliness_rating
         }
         catch (error) {
             console.log(error)
@@ -59,19 +45,19 @@ class FindLocations extends Component {
 
     findLocations = async () => {
         try {
-            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/find'+
-            '?q' + this.state.string +
-            '?overall_rating' + this.state.overall_rating +
-            '?price_rating' + this.state.price_rating +
-            '?quality_rating' + this.state.quality_rating +
-            '?clenliness_rating' + this.state.cleniness_rating,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Authorization': this.state.token
-                },
-            })
+            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/find' +
+                '?q' + this.state.string +
+                '?overall_rating' + this.state.overall_rating +
+                '?price_rating' + this.state.price_rating +
+                '?quality_rating' + this.state.quality_rating +
+                '?clenliness_rating' + this.state.clenliness_rating,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Authorization': this.state.token
+                    },
+                })
                 .then(responseData => {
                     this.setState({
                         loading: false
@@ -82,7 +68,7 @@ class FindLocations extends Component {
                     this.setState({
                         location_data: responseData
                     })
-                    console.log('This is the state ' + JSON.stringify(this.state.location_data))
+                    console.log('This is the state ' + this.state.location_data)
                 })
                 .catch((error) => {
 
@@ -147,25 +133,25 @@ class FindLocations extends Component {
                             <Button
                                 title="Add Review"
                                 onPress={() => navigation.navigate('AddReviewToLocation',
-                                {location_id : item.location_id})}
+                                    { location_id: item.location_id })}
                             />
+                            
                             <Button
                                 title="Get Reviews"
-                                onPress={() => navigation.navigate('GetLocationReviews',
-                                {location_id : item.location_id},
-                                {location_data : this.state.location_data}
-                                )}
-                                //add location id and location data here 
+                                onPress={() => navigation.navigate('GetLocationReviews',{ 
+                                    location_id: item.location_id
+                                })}
                             />
+
                             <Button
                                 title="Favourite Location"
                                 onPress={() => this.favouriteLocation(item.location_id)}
                             />
-                             <Button
+                            <Button
                                 title="unFavourite Location"
                                 onPress={() => this.unFavouriteLocation(item.location_id)}
                             />
-                        
+
                         </View>
                     )}
                     keyExtractor={(item, index) => item.id}

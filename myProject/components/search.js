@@ -12,10 +12,10 @@ class Search extends Component {
             location_review: 1,
             review_id: 1,
             string: '',
-            overall_rating: 1,
-            price_rating: 1,
-            quality_rating: 1,
-            cleniness_rating: 1,
+            overall_rating: 0,
+            price_rating: 0,
+            quality_rating: 0,
+            clenliness_rating: 0,
             search_in: '',
             limit: 5,
             offset: 0,
@@ -69,8 +69,8 @@ class Search extends Component {
                 <Text>Clenliness Rating</Text>
                 <Stars
                     half={true}
-                    default={this.state.cleniness_rating}
-                    update={(val) => this.setState({ cleniness_rating: val })}
+                    default={this.state.clenliness_rating}
+                    update={(val) => this.setState({ clenliness_rating: val })}
                 />
 
                 <TextInput
@@ -80,19 +80,13 @@ class Search extends Component {
                 />
                 <Button
                     title="find locations"
-                    onPress={() => navigation.navigate('FindLocations', {string : this.state.string,})}
-                />
-                <Button
-                    title=" Delete Review"
-                    onPress={() => navigation.navigate('DeleteLocationReview')}
-                />
-                <Button
-                    title=" Delete Review"
-                    onPress={() => navigation.navigate('DeleteLocationReview')}
-                />
-                <Button
-                    title=" add photo Review"
-                    onPress={() => navigation.navigate('AddPhotoToReview')}
+                    onPress={() => navigation.navigate('FindLocations', {
+                        string : this.state.string,
+                        overall_rating: this.state.overall_rating,
+                        price_rating: this.state.price_rating,
+                        quality_rating: this.state.quality_rating,
+                        clenliness_rating: this.state.clenliness_rating
+                    })}
                 />
             </View>
 

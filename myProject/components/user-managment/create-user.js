@@ -101,13 +101,14 @@ class CreateUser extends Component {
                         />
                     </View>
 
-                    <View styles ={styles.formItem}>
-                        <TouchableOpacity style= {styles.formTouch}
-                        onPress={() => this.addUser()}          
+                    <View styles={styles.formItem}>
+
+    
+
+                        <Button
+                            title="Sign Up!"
+                            onPress={() => this.addUser()}
                         />
-                        <Text styles = {styles.formTouch}>
-                            Sign Up
-                        </Text>
                     </View>
 
                 </ScrollView>

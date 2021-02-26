@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0bbe7008-fc8c-489a-b195-a7073f4feba0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/myProject/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/__tests__/App-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/__tests__/App-test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/android/app/src/main/java/com/myproject/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/android/app/src/main/java/com/myproject/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/components/User.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/metro.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/metro.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myProject/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/myProject/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1omQ73TJSCuFdVAWGlvwlKH7IDK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0bbe7008-fc8c-489a-b195-a7073f4feba0" name="Default Changelist" comment="" />
+      <created>1613889114691</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613889114691</updated>
+    </task>
+    <servers />
+  </component>
+</project>

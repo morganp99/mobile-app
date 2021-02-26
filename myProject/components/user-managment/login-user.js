@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, Alert } from 'react-native';
+import { Text, TextInput, View, Button, Aler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 

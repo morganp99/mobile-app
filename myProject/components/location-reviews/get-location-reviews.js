@@ -30,6 +30,8 @@ class GetLocationReviews extends Component {
     getData = async () => {
         try {
             this.setState({ 'token': await AsyncStorage.getItem('token') })
+            this.state.location_id = this.props.route.params.location_id
+
         }
         catch (error) {
             console.log(error)
@@ -59,8 +61,7 @@ class GetLocationReviews extends Component {
                     this.setState({
                         location_data: responseData
                     })
-                    //console.log('This is the state ' + JSON.stringify(this.state.location_data))
-                    //console.log('This is the review body ' + JSON.stringify(this.state.location_data.location_reviews))
+                    console.log('This is the review body ' + JSON.stringify(this.state.location_data.location_reviews))
                 })
                 .catch((error) => {
 
@@ -135,7 +136,6 @@ class GetLocationReviews extends Component {
     }
 
     render() {
-        const navigation = this.props.navigation;
         return (
 
             <View>
@@ -152,17 +152,14 @@ class GetLocationReviews extends Component {
                             <Text>Review {item.review_body}</Text>
                             <Text>Review Id {item.review_id}</Text>
 
-
-                            {/* <View>
-                                <Text>Overall Rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.overall_rating}
-                                    update={(val) => this.setState({ overall_rating: val })}
-                                />
+                            <Text>overal rating {item.overall_rating}</Text>
+                            <View>
+                                {/* <Stars
+                                    default={toString(item.overall_rating)}
+                                /> */}
                             </View>
 
-                            <View>
+                            {/* <View>
                                 <Text>Price Rating</Text>
                                 <Stars
                                     half={true}
@@ -198,15 +195,11 @@ class GetLocationReviews extends Component {
                             <Button
                                 title="Like Review"
                                 onPress={() => this.likeReview(this.state.location_data.location_id, item.review_id)}
-                            //send name review body and all 4 ratings
-
                             />
                             <Text>change location id to be passed in with param not state</Text>
                             <Button
                                 title="Dislike Review"
                                 onPress={() => this.dislikeReview(this.state.location_data.location_id, item.review_id)}
-                            //send name review body and all 4 ratings
-
                             />
                         </View>
                     )}

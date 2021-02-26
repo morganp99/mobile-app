@@ -20,6 +20,11 @@ class Profile extends Component {
     }
 
     componentDidMount = async () => {
+        this.getData()
+    }
+    
+
+    getData = async () => {
         try {
             this.setState({ 'id': await AsyncStorage.getItem('id'), 'token': await AsyncStorage.getItem('token') })
         }
@@ -29,6 +34,7 @@ class Profile extends Component {
         console.log('Users id ' + this.state.id + ' users token ' + this.state.token)
     }
 
+    
     render() {
         const navigation = this.props.navigation;
         //add logout button here aswell.
