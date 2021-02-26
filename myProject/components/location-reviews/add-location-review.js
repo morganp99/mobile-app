@@ -32,6 +32,7 @@ class AddReviewToLocation extends Component {
         catch (error) {
             console.log(error)
         }
+        this.render()
     }
     
 

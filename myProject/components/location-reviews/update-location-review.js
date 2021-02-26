@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Button, Stars, FlatList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationHelpersContext } from '@react-navigation/native';
 
 
 class GetLocationReviews extends Component {
@@ -13,6 +12,7 @@ class GetLocationReviews extends Component {
 
         this.state = {
             location_data: [],
+            review_id: 2,
             location_id: 1,
             overall_rating: 0,
             price_rating: 0,
@@ -39,6 +39,14 @@ class GetLocationReviews extends Component {
 
 
     findLocations = async () => {
+
+        const to_send = {
+            overall_rating: this.state.overall_rating,
+            price_rating: this.state.price_rating,
+            quality_rating: this.state.quality_rating,
+            clenliness_rating: this.state.clenliness_rating,
+            review_body: this.state.review_body,
+        }
         try {
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id +
 
@@ -48,6 +56,7 @@ class GetLocationReviews extends Component {
                     'Content-Type': 'application/json',
                     'X-Authorization': this.state.token
                 },
+                body: JSON.stringify(to_send),
             })
                 .then(responseData => {
                     this.setState({
@@ -72,6 +81,8 @@ class GetLocationReviews extends Component {
         }
         this.render()
     }
+
+
     deleteReview(location_id, review_id) {
         console.log("this is location id " + location_id)
         console.log("this is review id " + review_id)
@@ -89,11 +100,11 @@ class GetLocationReviews extends Component {
         this.getData()
     }
 
-    updateReview() {
-        console.log("this is location id " + location_id)
-        console.log("this is review id " + review_id)
 
-        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id, {
+    updateReview() {
+
+
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -106,77 +117,54 @@ class GetLocationReviews extends Component {
         this.getData()
     }
 
-
     render() {
         const navigation = this.props.navigation;
         return (
 
             <View>
-                <Text>Get Location Reviews</Text>
-                <Text>Name: {this.state.location_data.location_name}</Text>
-                <Text>location ID {this.state.location_data.location_id}</Text>
+                <Text>Update Review</Text>
+                <Text>Name: {this.state.location_data.location_name} add this to what ever gete passed in by name </Text>
+                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
+                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
+                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
+                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
 
-
-
-                <FlatList
-                    data={this.state.location_data.location_reviews}
-                    renderItem={({ item }) => (
-                        <View>
-                            <Text>Review {item.review_body}</Text>
-                            <Text>Review Id {item.review_id}</Text>
-
-
-                            {/* <View>
-                                <Text>Overall Rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.overall_rating}
-                                    update={(val) => this.setState({ overall_rating: val })}
-                                />
-                            </View>
-
-                            <View>
-                                <Text>Price Rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.price_rating}
-                                    update={(val) => this.setState({ price_rating: val })}
-                                />
-                            </View>
-
-                            <View>
-                                <Text>Quality Rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.quality_rating}
-                                    update={(val) => this.setState({ quality_rating: val })}
-                                />
-                            </View>
-
-                            <View>
-                                <Text>Clenliness rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.clenliness_rating}
-                                    update={(val) => this.setState({ clenliness_rating: val })}
-                                />
-                            </View> */}
-
-                            <Button
-                                title="Edit Review"
-                                onPress={() => navigation.navigate('UpdateLocationReview')}
-                                //send name review body and all 4 ratings
-
-                            />
-                        </View>
-                    )}
-                    keyExtractor={(item, index) => item.id}
+                <TextInput styles={styles.formInput}
+                    placeholder="Enter review..."
+                    onChangeText={(review_body) => this.setState({ review_body })}
+                    value={this.state.review_body}
                 />
-
+                <Button
+                    title="Clear Review Body"
+                    onPress={() => this.setState({review_body : ''})}
+                />
+                <Button
+                    title="Update Review"
+                    onPress={() => this.updateReview()}
+                />
             </View>
         )
     }
 }
 export default GetLocationReviews;
 
-
+const styles = StyleSheet.create({
+    title: {
+        color: 'black',
+        backgroundColor: 'lightgray',
+        padding: 10,
+        fontSize: 50
+    },
+    formItem: {
+        padding: 20
+    },
+    formLabel: {
+        fontSize: 15,
+        color: 'black'
+    },
+    formInput: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5
+    }
+})
