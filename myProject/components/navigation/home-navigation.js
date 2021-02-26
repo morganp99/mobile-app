@@ -16,6 +16,7 @@ class HomeNavigation extends Component {
         const navigation = this.props.navigation;
         return (
             <Tab.Navigator
+            initialRouteName="Home"
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;

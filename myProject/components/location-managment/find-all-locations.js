@@ -1,7 +1,5 @@
-
-
 import React, { Component, useState } from 'react';
-import { Text, TextInput, View, Button, Alert, FlatList, List } from 'react-native';
+import { Text, TextInput, View, Button, Alert, FlatList, Stars } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -43,10 +41,15 @@ class FindLocations extends Component {
     componentDidMount = async () => {
         try {
             this.setState({ 'token': await AsyncStorage.getItem('token') })
+            this.state.string = this.props.route.params.string
+            console.log('Look at me !')
+            console.log('This is the string    ' + this.state.string)
         }
         catch (error) {
             console.log(error)
         }
+
+
         this.findLocations()
     }
 
@@ -91,7 +94,12 @@ class FindLocations extends Component {
                     data={this.state.location_data}
                     renderItem={({ item }) => (
                         <View>
-                            <Text>{item.location_name}</Text>
+                            <Text>Name: {item.location_name}</Text>
+                            <Text>Town: {item.location_town}</Text>
+                            <Text>Quality Rating: {item.avg_quality_rating}</Text>
+                            <Text>Price Rating: {item.avg_price_rating}</Text>
+                            <Text>Quality Rating: {item.avg_quality_rating}</Text>
+                            <Text>Clenliness Rating: {item.avg_clenliness_rating}</Text>
                         </View>
                     )}
                     keyExtractor={(item, index) => item.id}
@@ -100,7 +108,35 @@ class FindLocations extends Component {
             </View>
         )
     }
+    // render() {
+    //     return (
+
+    //         <View>
+    //             <Text>Locations</Text>
+
+    //             <FlatList
+    //                 data={this.state.location_data}
+    //                 renderItem={({ item }) => (
+    //                     <View>
+    //                         <View>
+    //                             <Text>Name: {item.location_name}</Text>
+    //                             <Text>Town: {item.location_town}</Text>half={true}
+    //                             {/* <Stars
+    //                                 default={parseInt(item.avg_price_rating)}
+    //                             /> */}
+
+    //                         </View>
+    //                     </View>
+    //                 )}
+    //                 keyExtractor={(item, index) => item.id}
+    //             />
+
+    //         </View>
+    //     )
+    // }
 }
 
 
 export default FindLocations;
+
+
