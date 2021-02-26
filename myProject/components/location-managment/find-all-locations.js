@@ -119,6 +119,7 @@ class FindLocations extends Component {
                                 {location_data : this.state.location_data}
                                 )}
                             />
+                            
 
                         </View>
                     )}
