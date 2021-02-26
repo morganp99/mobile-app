@@ -12,10 +12,10 @@ class AddReviewToLocation extends Component {
 
         this.state = {
             location_id: 1,
-            overall_rating: 1,
-            price_rating: 1,
-            quality_rating: 1,
-            clenliness_rating: 1,
+            overall_rating: 0,
+            price_rating: 0,
+            quality_rating: 0,
+            clenliness_rating: 0,
             review_body: "Great coffee, but the bathrooms stank!",
             token: ''
         }
@@ -33,11 +33,13 @@ class AddReviewToLocation extends Component {
             console.log(error)
         }
     }
+    
 
     render() {
         const navigation = this.props.navigation;
+        //get location id here from props
+        const loc_id = this.props.params;
 
-        //add some error handling for email password and such.
         return (
             <View>
 

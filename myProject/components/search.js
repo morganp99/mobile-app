@@ -25,7 +25,6 @@ class Search extends Component {
 
     componentDidMount(){
         this.getData()
-        // this.findLocations()
     }
 
     getData = async () => {
