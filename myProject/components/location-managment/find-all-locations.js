@@ -39,6 +39,12 @@ class FindLocations extends Component {
     }
 
     componentDidMount = async () => {
+        this.getData()
+    }
+
+
+    getData = async () => {
+
         try {
             this.setState({ 'token': await AsyncStorage.getItem('token') })
             this.state.string = this.props.route.params.string
@@ -48,8 +54,6 @@ class FindLocations extends Component {
         catch (error) {
             console.log(error)
         }
-
-
         this.findLocations()
     }
 
@@ -88,14 +92,40 @@ class FindLocations extends Component {
         catch (error) {
             console.log(error)
         }
-
     }
+
+
+
+
+    favouriteLocation(location_id) {
+        console.log("this is location id " + location_id)
+
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/favourite/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': this.state.token
+            },
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+
+
+
+
+
+
+
+
     render() {
         const navigation = this.props.navigation;
         return (
 
             <View>
-                <Text>Locations</Text>
+                <Text>FIND ALL Locations</Text>
 
                 <FlatList
                     data={this.state.location_data}
@@ -119,6 +149,10 @@ class FindLocations extends Component {
                                 {location_data : this.state.location_data}
                                 )}
                                 //add location id and location data here 
+                            />
+                            <Button
+                                title="Favourite Location"
+                                onPress={() => this.favouriteLocation(item.location_id)}
                             />
                         
                         </View>

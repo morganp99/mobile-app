@@ -121,7 +121,6 @@ class GetLocationReviews extends Component {
     }
 
     dislikeReview(location_id, review_id) {
-        console.log('LOcation and review ID _----------------'+location_id + review_id)
         fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id + '/like', {
             method: 'DELETE',
             headers: {
