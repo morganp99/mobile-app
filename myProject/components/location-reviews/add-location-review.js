@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Button, StyleSheet, ScrollView } from 'react-native';
+import { Text, TextInput, View, Button, StyleSheet, ScrollView, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -36,6 +36,20 @@ class AddReviewToLocation extends Component {
         this.render()
     }
 
+    validateInput() {
+        var contains = false
+        var forbiddenWords = ["tea","Tea", "Cake","cake","cakes","Calkes" ,"Pastries","pastries","Pastry","pastry"];     
+        for( var i=0; i<forbiddenWords.length;i++){
+            console.log(this.state.review_body)
+            console.log(forbiddenWords[i])
+            contains = this.state.review_body.includes(forbiddenWords[i])
+            if (contains) {
+                Alert.alert('Please dont use thoese profanities, try again')
+                return
+            }
+        }
+        this.addReview()
+    }
 
     addReview = async () => {
         const to_send = {
@@ -143,7 +157,7 @@ class AddReviewToLocation extends Component {
                     </View>
                     <Button
                         title="Add review"
-                        onPress={() => this.addReview()}
+                        onPress={() => this.validateInput()}
                     />
 
                     <Button
