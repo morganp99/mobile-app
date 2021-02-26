@@ -95,8 +95,6 @@ class FindLocations extends Component {
     }
 
 
-
-
     favouriteLocation(location_id) {
         console.log("this is location id " + location_id)
 
@@ -113,11 +111,20 @@ class FindLocations extends Component {
     }
 
 
+    unFavouriteLocation(location_id) {
+        console.log("this is location id " + location_id)
 
-
-
-
-
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/favourite/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': this.state.token
+            },
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 
 
     render() {
@@ -153,6 +160,10 @@ class FindLocations extends Component {
                             <Button
                                 title="Favourite Location"
                                 onPress={() => this.favouriteLocation(item.location_id)}
+                            />
+                             <Button
+                                title="unFavourite Location"
+                                onPress={() => this.unFavouriteLocation(item.location_id)}
                             />
                         
                         </View>
