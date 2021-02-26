@@ -36,7 +36,7 @@ class AddReviewToLocation extends Component {
         this.render()
     }
 
-    validateInput() {
+    validateReviewBody() {
         var contains = false
         var forbiddenWords = ["tea","Tea", "Cake","cake","cakes","Calkes" ,"Pastries","pastries","Pastry","pastry"];     
         for( var i=0; i<forbiddenWords.length;i++){
@@ -57,7 +57,7 @@ class AddReviewToLocation extends Component {
             price_rating: this.state.price_rating,
             quality_rating: this.state.quality_rating,
             clenliness_rating: this.state.clenliness_rating,
-            review_body: this.state.review_body,
+            review_body: this.state.review_body
         }
         try {
             let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review', {
@@ -79,7 +79,8 @@ class AddReviewToLocation extends Component {
         catch (error) {
             console.log(error)
         }
-
+        const navigation = this.props.navigation;
+        navigation.naigate('GetLocationReviews')
     }
 
 
@@ -157,18 +158,8 @@ class AddReviewToLocation extends Component {
                     </View>
                     <Button
                         title="Add review"
-                        onPress={() => this.validateInput()}
+                        onPress={() => this.validateReviewBody()}
                     />
-
-                    <Button
-                        title="Attatch Photo"
-                        onPress={() => this.addPhotoToReview()}
-                    />
-
-                    {/* <Button
-                            title="Take Photo"
-                            onPress={() => navigation.navigate('TakePhotoForReview')}
-                        /> */}
 
                 </ScrollView>
             </View>
@@ -183,7 +174,7 @@ const styles = StyleSheet.create({
 
     flexContainer: {
         flex: 1,
-        backgroundColor: 'sandybrown'
+        backgroundColor: 'aliceblue'
     },
     title: {
         color: 'black',
@@ -194,13 +185,13 @@ const styles = StyleSheet.create({
         padding: 20
     },
     formLabel: {
-        backgroundColor: 'sienna',
+        backgroundColor: 'cornflowerblue',
         fontSize: 20,
         color: 'black'
     },
     formInput: {
         borderWidth: 2,
-        borderColor: 'sienna',
+        borderColor: 'cornflowerblue',
         borderRadius: 5
     },
 })

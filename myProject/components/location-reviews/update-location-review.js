@@ -11,14 +11,14 @@ class GetLocationReviews extends Component {
         super(props);
 
         this.state = {
-            location_data: [],
-            review_id: 2,
+            location_name: '',
+            review_id: 12,
             location_id: 1,
             overall_rating: 0,
             price_rating: 0,
             quality_rating: 0,
             clenliness_rating: 0,
-            review_body: "Great coffee, but the bathrooms stank!",
+            review_body: "",
             token: ''
         }
     }
@@ -30,71 +30,56 @@ class GetLocationReviews extends Component {
     getData = async () => {
         try {
             this.setState({ 'token': await AsyncStorage.getItem('token') })
+            this.state.review_id = this.props.route.params.review_id
+            this.state.review_body = this.props.route.params.review_body
+            this.state.overall_rating = this.props.route.params.overall_rating
+            this.state.price_rating = this.props.route.params.price_rating
+            this.state.quality_rating = this.props.route.params.quality_rating
+            this.state.clenliness_rating = this.props.route.params.clenliness_rating
+            this.state.location_name = this.props.route.params.location_name
         }
         catch (error) {
             console.log(error)
         }
-        this.findLocations()
     }
 
+    deleteReview = async () => {
 
-    findLocations = async () => {
         try {
-            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id +
-
-            {
-                method: 'GET',
+            let response = await fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
+                method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-Authorization': this.state.token
                 },
             })
-                .then(responseData => {
-                    this.setState({
-                        loading: false
-                    })
-                    return responseData.json();
-                })
-                .then(responseData => {
-                    this.setState({
-                        location_data: responseData
-                    })
-                    console.log('This is the state ' + JSON.stringify(this.state.location_data))
-                    console.log('This is the review body ' + JSON.stringify(this.state.location_data.location_reviews))
+                .then(response => {
+                    return response.json()
                 })
                 .catch((error) => {
-
-                    console.error('Error:', error);
                 });
         }
         catch (error) {
             console.log(error)
         }
-        this.render()
+        navigation.navigate('GetLocationReviews')
+    }
+
+    validateReviewBody() {
+        var contains = false
+        var forbiddenWords = ["tea", "Tea", "Cake", "cake", "cakes", "Cakes", "Pastries", "pastries", "Pastry", "pastry"];
+        for (var i = 0; i < forbiddenWords.length; i++) {
+            contains = this.state.review_body.includes(forbiddenWords[i])
+            if (contains) {
+                Alert.alert('Please dont use thoese profanities, try again')
+                return
+            }
+        }
+        this.updateReview()
+        navigation.navigate
     }
 
 
-    deleteReview(location_id, review_id) {
-        console.log("this is location id " + location_id)
-        console.log("this is review id " + review_id)
-
-        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Authorization': this.state.token
-            },
-        })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        this.getData()
-    }
-
-
-    updateReview(location_id, review_id) {
-
-        console.log('This is the review and location ID ----------------------------'+location_id + review_id)
+    updateReview() {
         const to_send = {
             overall_rating: this.state.overall_rating,
             price_rating: this.state.price_rating,
@@ -103,36 +88,31 @@ class GetLocationReviews extends Component {
             review_body: this.state.review_body,
         }
 
-        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id, {
+        fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'X-Authorization': this.state.token
             },
+            body: JSON.stringify(to_send),
         })
             .catch((error) => {
                 console.error('Error:', error);
             });
         this.getData()
-        //navigate back 
     }
 
-
-
-
-
-
     render() {
-        const navigation = this.props.navigation;
         return (
 
             <View>
-                <Text>Update LOCATION Review</Text>
-                <Text>Name: {this.state.location_data.location_name} add this to what ever gete passed in by name </Text>
-                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
-                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
-                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
-                <Text>All 4 ratings in stars here, set them too what ever was passed in.</Text>
+                <Text style ={styles.title}>{this.state.location_name} </Text>
+
+                <Text style={styles.outputText}>Overall Rating: {this.state.overall_rating}</Text>
+                <Text style={styles.outputText}>Price Rating: {this.state.price_rating}</Text>
+                <Text style={styles.outputText}>Quality Rating: {this.state.quality_rating}</Text>
+                <Text style={styles.outputText}>Clenliness Rating: {this.state.clenliness_rating}</Text>
+                <Text style={styles.outputTitleText}>Review: {this.state.review_body}</Text>
 
                 <TextInput styles={styles.formInput}
                     placeholder="Enter review..."
@@ -141,12 +121,15 @@ class GetLocationReviews extends Component {
                 />
                 <Button
                     title="Clear Review Body"
-                    onPress={() => this.setState({review_body : ''})}
+                    onPress={() => this.setState({ review_body: '' })}
                 />
-                <Text>ADD LOCATION AND REVIEW ID TO UPDATE REVIEW</Text>
                 <Button
                     title="Update Review"
                     onPress={() => this.updateReview()}
+                />
+                <Button
+                    title="Delete Review"
+                    onPress={() => this.deleteReview()}
                 />
             </View>
         )
@@ -157,9 +140,8 @@ export default GetLocationReviews;
 const styles = StyleSheet.create({
     title: {
         color: 'black',
-        backgroundColor: 'lightgray',
         padding: 10,
-        fontSize: 50
+        fontSize: 25
     },
     formItem: {
         padding: 20

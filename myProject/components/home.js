@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     
     flexContainer: {
         flex: 1,
-        backgroundColor: 'sandybrown'
+        backgroundColor: 'aliceblue'
     },
     title: {
         color: 'black',
@@ -107,6 +107,6 @@ const styles = StyleSheet.create({
     },
     outline : {
         borderWidth: 2,
-        borderColor: 'sienna'
+        borderColor: 'cornflowerblue'
     }
 })

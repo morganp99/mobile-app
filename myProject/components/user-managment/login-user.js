@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     
     flexContainer: {
         flex: 1,
-        backgroundColor: 'sandybrown'
+        backgroundColor: 'aliceblue'
     },
     title: {
         color: 'black',
@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
         padding: 20
     },
     formLabel: {
-        backgroundColor: 'sienna',
+        backgroundColor: 'cornflowerblue',
         fontSize: 20,
         color: 'black'
     },
     formInput: {
         borderWidth: 2,
-        borderColor: 'sienna',
+        borderColor: 'cornflowerblue',
         borderRadius: 5
     },
 })

@@ -18,7 +18,7 @@ class GetLocationReviews extends Component {
             price_rating: 0,
             quality_rating: 0,
             clenliness_rating: 0,
-            review_body: "Great coffee, but the bathrooms stank!",
+            review_body: "",
             token: ''
         }
     }
@@ -136,72 +136,45 @@ class GetLocationReviews extends Component {
     }
 
     render() {
+        const navigation = this.props.navigation;
         return (
 
-            <View>
-                <Text>GET LOACTION REVIEW</Text>
-                <Text>Name: {this.state.location_data.location_name}</Text>
-                <Text>location ID {this.state.location_data.location_id}</Text>
-
-
-
+            <View style = {styles.flexContainer}>
+                <Text style = {styles.title}>{this.state.location_data.location_name} Reviews</Text>
                 <FlatList
                     data={this.state.location_data.location_reviews}
                     renderItem={({ item }) => (
-                        <View>
-                            <Text>Review {item.review_body}</Text>
-                            <Text>Review Id {item.review_id}</Text>
 
-                            <Text>overal rating {item.overall_rating}</Text>
-                            <View>
-                                {/* <Stars
-                                    default={toString(item.overall_rating)}
-                                /> */}
-                            </View>
-
-                            {/* <View>
-                                <Text>Price Rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.price_rating}
-                                    update={(val) => this.setState({ price_rating: val })}
-                                />
-                            </View>
-
-                            <View>
-                                <Text>Quality Rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.quality_rating}
-                                    update={(val) => this.setState({ quality_rating: val })}
-                                />
-                            </View>
-
-                            <View>
-                                <Text>Clenliness rating</Text>
-                                <Stars
-                                    half={true}
-                                    default={this.state.clenliness_rating}
-                                    update={(val) => this.setState({ clenliness_rating: val })}
-                                />
-                            </View> */}
+                        <View style={styles.outline}>
+                            
+                            <Text style={styles.outputText}>Overall Rating: {item.overall_rating}</Text>
+                            <Text style={styles.outputText}>Price Rating: {item.price_rating}</Text>
+                            <Text style={styles.outputText}>Quality Rating: {item.quality_rating}</Text>
+                            <Text style={styles.outputText}>Clenliness Rating: {item.clenliness_rating}</Text>
+                            <Text style={styles.outputTitleText}>Review: {item.review_body}</Text>
 
                             <Button
                                 title="Edit Review"
-                                onPress={() => navigation.navigate('UpdateLocationReview')}
-                            //send name review body and all 4 ratings
-
+                                onPress={() => navigation.navigate('UpdateLocationReview',{
+                                    location_name:this.state.location_data.location_name,
+                                    quality_rating: item.quality_rating,
+                                    price_rating: item.price_rating,
+                                    clenliness_rating: item. clenliness_rating,
+                                    overall_rating: item.overall_rating,
+                                    review_body: item.review_body,
+                                    review_id : item.review_id         
+                                })}
                             />
                             <Button
                                 title="Like Review"
                                 onPress={() => this.likeReview(this.state.location_data.location_id, item.review_id)}
                             />
-                            <Text>change location id to be passed in with param not state</Text>
                             <Button
                                 title="Dislike Review"
                                 onPress={() => this.dislikeReview(this.state.location_data.location_id, item.review_id)}
                             />
                         </View>
+
                     )}
                     keyExtractor={(item, index) => item.id}
                 />
@@ -212,4 +185,28 @@ class GetLocationReviews extends Component {
 }
 export default GetLocationReviews;
 
+
+
+const styles = StyleSheet.create({
+    
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'aliceblue'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    outputTitleText: {
+        fontSize: 20
+    },
+    outputText:{
+        fontSize: 18
+    },
+    outline : {
+        borderWidth: 2,
+        borderColor: 'cornflowerblue'
+    }
+})
 

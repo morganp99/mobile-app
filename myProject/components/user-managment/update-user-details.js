@@ -1,5 +1,5 @@
-import React, { Component, useEffect, useState } from 'react';
-import { Text, TextInput, View, Button, Alert } from 'react-native';
+import React, { Component } from 'react';
+import { Text, TextInput, View, Button, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class UpdateUserDetails extends Component {
@@ -68,10 +68,10 @@ class UpdateUserDetails extends Component {
 
     validateInput() {
 
-        if ((this.state.password.length)>6) {
+        if ((this.state.password.length) > 6) {
             this.validateUserDetails()
         }
-        else{
+        else {
             Alert.alert("Password is too short")
         }
     }
@@ -149,27 +149,43 @@ class UpdateUserDetails extends Component {
 
     render() {
         return (
-            <View>
-                <TextInput
-                    placeholder="Update first name..."
-                    onChangeText={(first_name) => this.setState({ first_name })}
-                    value={this.state.first_name}
-                />
-                <TextInput
-                    placeholder=" last name..."
-                    onChangeText={(last_name) => this.setState({ last_name })}
-                    value={this.state.last_name}
-                />
-                <TextInput
-                    placeholder="Enter email..."
-                    onChangeText={(email) => this.setState({ email })}
-                    value={this.state.email}
-                />
-                <TextInput
-                    placeholder="Enter password..."
-                    onChangeText={(password) => this.setState({ password })}
-                    value={this.state.password}
-                />
+            <View style={styles.flexContainer}>
+                <View style={styles.formItem}>
+                    <Text style={styles.formLabel}>First name</Text>
+                    <TextInput style={styles.formInput}
+                        placeholder="Update first name..."
+                        onChangeText={(first_name) => this.setState({ first_name })}
+                        value={this.state.first_name}
+                    />
+                </View>
+
+                <View style={styles.formItem}>
+                    <Text style={styles.formLabel}>Last name</Text>
+                    <TextInput style={styles.formInput}
+                        placeholder=" last name..."
+                        onChangeText={(last_name) => this.setState({ last_name })}
+                        value={this.state.last_name}
+                    />
+                </View>
+
+                <View style={styles.formItem}>
+                    <Text style={styles.formLabel}>Email</Text>
+                    <TextInput style={styles.formInput}
+                        placeholder="Enter email..."
+                        onChangeText={(email) => this.setState({ email })}
+                        value={this.state.email}
+                    />
+                </View>
+
+                <View style={styles.formItem}>
+                    <Text style={styles.formLabel}>Password</Text>
+                    <TextInput style={styles.formInput}
+                        placeholder="Enter password..."
+                        onChangeText={(password) => this.setState({ password })}
+                        value={this.state.password}
+                    />
+                </View>
+
                 <Button
                     title="Update details"
                     onPress={() => this.validateInput()}
@@ -179,3 +195,41 @@ class UpdateUserDetails extends Component {
     }
 }
 export default UpdateUserDetails;
+const styles = StyleSheet.create({
+
+    formItem: {
+        padding: 20
+    },
+    formLabel: {
+        backgroundColor: 'cornflowerblue',
+        fontSize: 20,
+        color: 'black'
+    },
+    formInput: {
+        borderWidth: 2,
+        borderColor: 'cornflowerblue',
+        borderRadius: 5
+    },
+    flexContainer: {
+        flex: 1,
+        backgroundColor: 'aliceblue'
+    },
+    title: {
+        color: 'black',
+        padding: 10,
+        fontSize: 25
+    },
+    outputTitleText: {
+        fontSize: 20
+    },
+    outputText: {
+        fontSize: 18
+    },
+    outline: {
+        borderWidth: 2,
+        borderColor: 'cornflowerblue'
+    },
+    buttonStyle: {
+        backgroundColor: 'black'
+    }
+})

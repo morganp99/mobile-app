@@ -123,45 +123,45 @@ class FindLocations extends Component {
                     renderItem={({ item }) => (
 
 
-                        <View style = {styles.flexContainer}>
-                <Text style={styles.title}>Favourite Locations</Text>
-                <FlatList
-                    data={this.state.location_data}
-                    renderItem={({ item }) => (
-                        <View style = {styles.outline}>
-                            <Text style={styles.outputTitleText}>Loaction: {item.location_name}</Text>
-                            <Text style ={styles.outputText}>Town: {item.location_town}</Text>
-                            <Text style ={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
-                            <Text style ={styles.outputText}>Price Rating: {item.avg_price_rating}</Text>
-                            <Text style ={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
-                            <Text style ={styles.outputText}>Clenliness Rating: {item.avg_clenliness_rating}</Text>
-                            <Button
-                                title="Add Review"
-                                onPress={() => navigation.navigate('AddReviewToLocation',
-                                    { location_id: item.location_id })}
-                            />
-                            
-                            <Button
-                                title="Get Reviews"
-                                onPress={() => navigation.navigate('GetLocationReviews',{ 
-                                    location_id: item.location_id
-                                })}
+                        <View style={styles.flexContainer}>
+                            <Text style={styles.title}>Favourite Locations</Text>
+                            <FlatList
+                                data={this.state.location_data}
+                                renderItem={({ item }) => (
+                                    <View style={styles.outline}>
+                                        <Text style={styles.outputTitleText}>Loaction: {item.location_name}</Text>
+                                        <Text style={styles.outputText}>Town: {item.location_town}</Text>
+                                        <Text style={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
+                                        <Text style={styles.outputText}>Price Rating: {item.avg_price_rating}</Text>
+                                        <Text style={styles.outputText}>Quality Rating: {item.avg_quality_rating}</Text>
+                                        <Text style={styles.outputText}>Clenliness Rating: {item.avg_clenliness_rating}</Text>
+                                        <Button
+                                            title="Add Review"
+                                            onPress={() => navigation.navigate('AddReviewToLocation',
+                                                { location_id: item.location_id })}
+                                        />
+
+                                        <Button
+                                            title="Get Reviews"
+                                            onPress={() => navigation.navigate('GetLocationReviews', {
+                                                location_id: item.location_id
+                                            })}
+                                        />
+
+                                        <Button
+                                            title="Favourite Location"
+                                            onPress={() => this.favouriteLocation(item.location_id)}
+                                        />
+                                        <Button
+                                            title="unFavourite Location"
+                                            onPress={() => this.unFavouriteLocation(item.location_id)}
+                                        />
+                                    </View>
+                                )}
+                                keyExtractor={(item, index) => item.id}
                             />
 
-                            <Button
-                                title="Favourite Location"
-                                onPress={() => this.favouriteLocation(item.location_id)}
-                            />
-                            <Button
-                                title="unFavourite Location"
-                                onPress={() => this.unFavouriteLocation(item.location_id)}
-                            />
                         </View>
-                    )}
-                    keyExtractor={(item, index) => item.id}
-                />
-
-            </View>
                     )}
                     keyExtractor={(item, index) => item.id}
                 />
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
 
     flexContainer: {
         flex: 1,
-        backgroundColor: 'sandybrown'
+        backgroundColor: 'aliceblue'
     },
     title: {
         color: 'black',
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     },
     outline: {
         borderWidth: 2,
-        borderColor: 'sienna'
+        borderColor: 'cornflowerblue'
     },
     buttonStyle: {
         backgroundColor: 'black'
